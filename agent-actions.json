@@ -1,0 +1,122 @@
+[
+  {
+    "name": "add_credit",
+    "description": "Record goods given on credit to a customer.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "customerId": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number"
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "customerId",
+        "amount"
+      ]
+    }
+  },
+  {
+    "name": "record_payment",
+    "description": "Record money received from a customer.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "customerId": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number"
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "cash",
+            "UPI"
+          ]
+        }
+      },
+      "required": [
+        "customerId",
+        "amount"
+      ]
+    }
+  },
+  {
+    "name": "get_balance",
+    "description": "Get what a customer owes the shop.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "customerId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "customerId"
+      ]
+    }
+  },
+  {
+    "name": "list_ledger",
+    "description": "List a customer's entries with the running balance.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "customerId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "customerId"
+      ]
+    }
+  },
+  {
+    "name": "draft_reminder",
+    "description": "Draft a payment reminder in a chosen tone. Does not send anything.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "customerId": {
+          "type": "string"
+        },
+        "tone": {
+          "type": "string",
+          "enum": [
+            "gentle",
+            "clear",
+            "firm"
+          ]
+        }
+      },
+      "required": [
+        "customerId"
+      ]
+    }
+  },
+  {
+    "name": "hold_pending_upi",
+    "description": "Hold a still-processing UPI payment as credit so the sale can finish.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "customerId": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "customerId",
+        "amount"
+      ]
+    }
+  }
+]

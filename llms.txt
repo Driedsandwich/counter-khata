@@ -1,0 +1,57 @@
+# Counter khata — fictional design prototype
+
+This static, local-only UI/UX concept explores a kirana shop's udhaar ledger.
+All people, transactions and balances are fictional. No real money moves.
+No messages are sent. There is no payment provider, backend, analytics or network API.
+The QR illustration is decorative and contains no payment destination.
+
+## Runtime interface
+
+Startup calls exposeAgentTools(store) from the unmodified khata-core.js.
+When document.modelContext or navigator.modelContext supports registerTool,
+it attempts to register the six tools below. Settings reports the result.
+window.counterKhata is also exposed:
+
+  counterKhata.tools
+  counterKhata.call('get_balance', { customerId: 'ravi' })
+  counterKhata.call('add_credit', { customerId: 'ravi', amount: 250 })
+
+The demo-added Ravi Shah has ID "ravi". Original core customer "c1" is Ramesh Kumar,
+not Ravi. Other demo IDs: meena, arjun, sita, kabir, dev. Original IDs c1–c8 remain.
+Consult agent-actions.json for exact names, descriptions, argument schemas and enums.
+
+## Tools
+
+- add_credit: add goods given on credit; increases the amount owed.
+  Required: customerId (string), amount (number). Optional: note (string).
+- record_payment: record received money; reduces the amount owed.
+  Required: customerId, amount. Optional: method ("cash" or "UPI").
+- get_balance: read outstanding balance for customerId.
+- list_ledger: read entries and runningBalance for customerId.
+- draft_reminder: draft English text only; never sends it.
+  Required: customerId. Optional: tone ("gentle", "clear", "firm").
+- hold_pending_upi: hold a NEW PURCHASE as pending credit; increases amount owed.
+  Required: customerId, amount. Do not use this tool for an existing debt repayment:
+  doing so adds that amount again. The UI layer tracks pending repayments separately.
+
+## Data and limits
+
+Actions affect fictional browser-local data. They do not communicate with anyone.
+UI actions preserve cancelled entries via voidEntry; core undo() has different semantics
+and is intentionally not used by the UI's five-second undo banner.
+The supplied core's validation and number arithmetic are unchanged. This is not a
+production accounting API. Use finite, positive amounts with at most two decimal places.
+Raw API callers must validate their inputs. No authentication or remote endpoint exists.
+The raw core does not include UI-only pending repayment records in list_ledger.
+Settings can reset the demo. Judge scenarios also replace the fictional entries.
+Real WebMCP support is browser-dependent; only a mock registration path and the plain
+JavaScript API were verified in the included automated checks.
+
+## Files
+
+- README.md: Japanese setup guide, design choices, checked and unchecked behavior.
+- agent-actions.json: exact AGENT_TOOLS array exported as JSON.
+- khata-core.js: user-supplied, unchanged core.
+- demo-data.js and app.js: fixtures, presentation, safe storage fallback and UI workflows.
+- tests/: reproducible browser/core checks and their recorded results.
+- shots/: actual headless Chromium screenshots, with dimensions in manifest.json.
