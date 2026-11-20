@@ -1,0 +1,54 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Counter Khata — case study</title><style>
+@page { size: A4; margin: 11mm 12mm; }
+:root { --paper:#FBF5EA; --ink:#2B1B15; --muted:#6A574D; --accent:#8E1C17; --line:#E6D7C4; }
+* { box-sizing: border-box; }
+html { background: #fff; }
+body { margin: 0; color: var(--ink); font: 8.6pt/1.38 -apple-system, "Helvetica Neue", "Segoe UI", Arial, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+h1 { font-size: 16pt; line-height: 1.15; margin: 0 0 2pt; letter-spacing: -.01em; }
+.sub { color: var(--muted); margin: 0 0 6pt; font-size: 8.2pt; }
+h2 { font-size: 9.6pt; color: var(--accent); margin: 7pt 0 2pt; padding-bottom: 1pt; border-bottom: .6pt solid var(--line); }
+p { margin: 0 0 3pt; }
+ul, ol { margin: 0 0 3pt; padding-left: 13pt; }
+li { margin: 0 0 1.5pt; }
+code { font: 8pt ui-monospace, Menlo, monospace; }
+.sources { font-size: 7.2pt; color: var(--muted); margin-top: 6pt; border-top: .6pt solid var(--line); padding-top: 3pt; }
+figure { margin: 0; }
+figure img { width: 100%; display: block; border: .6pt solid var(--line); border-radius: 5pt; }
+figcaption { font-size: 7pt; color: var(--muted); margin-top: 2pt; line-height: 1.25; }
+.wrap { display: grid; grid-template-columns: 1fr 46mm; gap: 9pt; } .side { display: flex; flex-direction: column; gap: 6pt; } .side img { height: 58mm; object-fit: cover; object-position: top; } .side img.auto { height: auto; }</style></head><body><h1>Counter Khata — a credit book for the busy kirana counter</h1>
+<p class="sub">Concept redesign · Brief DS-03 · the people and amounts in the demo are fictional</p><div class="wrap"><div>
+<h2>Who it is for</h2>
+<p>Kirana shopkeepers and counter staff giving goods on credit (udhaar) while serving a queue, often one-handed. The brief asks for a credit entry in under 10 seconds; here that is a target judges can time on screen, not a tested result.</p>
+<h2>What goes wrong today</h2>
+<ul>
+<li>Users of popular khata (credit-book) apps report that adding a name and amount is interrupted by ads and a two-entries-a-day free limit, and that reminders became limited or paid [1].</li>
+<li>After one update, "given" (red) and "received" (green) amounts all turned black [2].</li>
+<li>A village shop family keeps credit only in a notebook; one buyer's balance kept growing despite repeated verbal reminders [3].</li>
+<li>When UPI stays on "processing": in one case the staff could not check the owner's bank app and the customer paid twice [4]; in another the customer took the goods on credit [5].</li>
+</ul>
+<p><strong>Limits:</strong> solo designer outside India; desk research only; no interviews or user tests yet. These accounts show the problems occur, not how often.</p>
+<h2>Three decisions</h2>
+<ol>
+<li><strong>Amount first.</strong> A large keypad, then one of six recent customers in thumb reach, then Save. A timer runs from the first key to Save. <em>Trade-off:</em> anyone outside those six is found by search.</li>
+<li><strong>Balances you can explain.</strong> Every line shows the balance after it; "Given" and "Received" use colour, a +/− sign and a word; mistakes stay visible, struck through. <em>Trade-off:</em> more to scan.</li>
+<li><strong>Reminders you read first.</strong> Pick gentle, clear or firm, see exactly what the customer will read, then copy it to send from your own chat app. <em>Trade-off:</em> sending stays manual.</li>
+</ol>
+<h2>Errors and edge states</h2>
+<ul>
+<li>After every save, a 5-second Undo bar floats over the screen, and long amounts shrink to one line, so the keypad never moves under the thumb.</li>
+<li>Receive via UPI: amount → QR → a large "Received ₹250" that staff can see → ledger. (In the demo you choose the result.)</li>
+<li>If UPI is still processing, the goods can still go: the amount sits on the customer's khata as credit and a card above the keypad waits. <strong>Mark received</strong> clears it; <strong>UPI failed · keep on khata</strong> keeps it. Payments are simulated.</li>
+</ul>
+<h2>Accessibility and language</h2>
+<p>Contrast: body 15.2:1, secondary 6.3:1, buttons 8.6:1; at least 6.1:1 under simulated deuteranopia and protanopia. Targets ≥48 px (keys 72 px), visible focus, screen-reader labels, saves announced. Three text sizes without sideways page scrolling; reduce motion. Hindi labels are AI-drafted, not native-reviewed.</p>
+<h2>Design system</h2>
+<p>The accent comes from the red cloth of a trader's bahi-khata, linked to prosperity and new account books [6].</p>
+<ul>
+<li>#8E1C17 on paper #FBF5EA; ink #2B1B15; secondary #6A574D. System fonts; type 16 / 18 / 24 / 48 px; 8 px grid.</li>
+<li>Four themes (bahi red, marigold, green, black and white), each with text at 4.5:1 or more.</li>
+</ul>
+<h2>Try it in 30 seconds</h2>
+<p><strong>driedsandwich.github.io/counter-khata</strong> — phone-friendly, nothing is paid or sent. Tap 2 · 5 · 0 → Ravi → Save and read the timer; open the ledger; preview a reminder. On a laptop, a side panel opens each state directly. The same actions are listed for AI assistants (<code>agent-actions.json</code>). Each number on this page, and how it was checked, is in the repository's <em>Verified facts</em> table (github.com/Driedsandwich/counter-khata).</p>
+<h2>AI use and credits</h2>
+<p>AI helped with ideas, research summaries, mock-ups, code, Hindi drafts and this text; interface decisions are mine. Icons drawn in code; no UI kit or template.</p>
+<p class="sources"><strong>Sources</strong> [1] r/androidapps thread on khata-app alternatives; Google Play reviews · [2] Google Play review, 8 Aug 2025 · [3] r/LegalAdviceIndia, sweet shop owed ₹4 lakh · [4] r/Kerala, GPay stuck in processing · [5] X post, Nov 2026 · [6] Deccan Herald (Feb 2018) and India Today (Feb 2026) on the red bahi-khata</p></div><aside class="side"><figure><img class="" src="images/entry_top.jpg" alt="Amount first: keypad, six recent customers, timer"><figcaption>Amount first: keypad, six recent customers, timer</figcaption></figure><figure><img class="auto" src="images/pending.jpg" alt="UPI still processing: goods given, held on the khata"><figcaption>UPI still processing: goods given, held on the khata</figcaption></figure><figure><img class="" src="images/ledger.jpg" alt="Ledger: balance after every line, sign and word for money in and out"><figcaption>Ledger: balance after every line, sign and word for money in and out</figcaption></figure></aside></div></body></html>
