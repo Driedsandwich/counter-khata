@@ -171,10 +171,21 @@ export class KhataStore {
     return true;
   }
 
+  // UPI payments still processing may yet arrive, so they are left out of reminders.
+  pendingTotal(customerId) {
+    return this.state.entries
+      .filter(e => e.customerId === customerId && e.kind === "pending" && !e.voided)
+      .reduce((sum, e) => sum + e.amount, 0);
+  }
+
+  reminderAmount(customerId) {
+    return Math.max(0, this.balance(customerId) - this.pendingTotal(customerId));
+  }
+
   draftReminder({ customerId, tone = "gentle", lang = "en" }) {
     const c = this.customer(customerId);
     if (!c) throw new Error("Unknown customer");
-    const amt = formatINR(this.balance(customerId));
+    const amt = formatINR(this.reminderAmount(customerId));
     const first = c.name.split(" ")[0];
     const t = {
       en: {

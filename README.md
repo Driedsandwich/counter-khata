@@ -5,7 +5,7 @@ A concept redesign of a credit book (khata / udhaar) for small kirana shops, mad
 **Live demo:** see the repository's GitHub Pages link.
 
 ## Try it in 30 seconds
-1. Tap **2 · 5 · 0**, pick **Ravi**, tap **Save**. The timer at the top shows how long the entry took.
+1. Tap **2 · 5 · 0**, pick **Ravi**, tap **Save** (five taps). The timer at the top shows how long the entry took.
 2. Within 5 seconds you can **Undo**. Cancelled entries stay in the ledger, struck through.
 3. Open **Ledger** → **Send reminder**, choose a tone and copy the message (nothing is sent).
 4. **Receive via UPI** → demo QR → try *Received*, *Processing* or *Failed*. A processing payment can be held on the khata until it lands.
@@ -34,6 +34,9 @@ Checked on 20 November 2026. Each line says how it was checked, so it can be rep
 | Timer | runs from the first key press to Save and shows "Saved in X s" | `app.js` |
 | No network | the page cannot make requests (`connect-src 'none'`) | Content-Security-Policy in `index.html` |
 | Indian digit grouping | 1,25,000 and 98,76,54,321 | `app.js` (`toLocaleString('en-IN')`) |
+| Five taps for a ₹250 credit | 2, 5, 0, the Ravi chip, Save | Chrome, counted while entering |
+| Reminders leave out a processing UPI | with ₹250 still processing on a ₹1,500 balance, the reminder asks for ₹1,250 | headless Chrome on the reminder screen; `reminderAmount` in `khata-core.js` |
+| Later corrections | an entry can be cancelled from the ledger and stays visible, struck through | `app.js` (entry Details → Cancel) |
 
 **Not done yet:** no usability tests with shopkeepers; Hindi labels are AI-drafted and not reviewed by a native speaker; UPI results are chosen in the demo, not received from a bank.
 
