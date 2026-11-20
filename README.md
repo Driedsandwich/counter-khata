@@ -37,8 +37,20 @@ Checked on 20 November 2026. Each line says how it was checked, so it can be rep
 | Five taps for a ₹250 credit | 2, 5, 0, the Ravi chip, Save | Chrome, counted while entering |
 | Reminders leave out a processing UPI | with ₹250 still processing on a ₹1,500 balance, the reminder asks for ₹1,250 | headless Chrome on the reminder screen; `reminderAmount` in `khata-core.js` |
 | Later corrections | an entry can be cancelled from the ledger and stays visible, struck through | `app.js` (entry Details → Cancel) |
+| Ledger after a ₹250 credit | top line reads "+ Given", "+₹250", "Balance after ₹1,500" (from ₹1,250) | headless Chrome on the ledger screen |
+| Cash payments | "Received cash" in the ledger; ₹500 cash took Ravi from ₹1,250 to ₹750 | headless Chrome on the ledger screen |
 
 **Not done yet:** no usability tests with shopkeepers; Hindi labels are AI-drafted and not reviewed by a native speaker; UPI results are chosen in the demo, not received from a bank.
+
+## Sources cited in the case study
+1. r/androidapps, "Any alternatives for OkCredit app" — https://www.reddit.com/r/androidapps/comments/1qi5ubk/any_alternatives_for_okcredit_app/ ; OkCredit on Google Play (reviews) — https://play.google.com/store/apps/details?id=in.okcredit.merchant&hl=en_IN
+2. Google Play review of the same app ("after updating whole number are showing in black") — same Play page as above
+3. r/LegalAdviceIndia, a village shop owed ₹4 lakh by a buyer — https://www.reddit.com/r/LegalAdviceIndia/comments/1oc71ni/need_legal_help_sweet_shop_owes_4_lakh_for_goods/
+4. r/Kerala, GPay payment stuck in processing — https://www.reddit.com/r/Kerala/comments/1mzrl5i/gpay_issue_help_payment_stuck_in_processing/
+5. X post by an individual user, 11 Nov 2026 (UPI pending for five minutes, goods bought on credit) — link withheld to avoid pointing at a private person
+6. Deccan Herald, "In a red book, a tale of accounts" (2018) — https://www.deccanherald.com/features/in-red-book-tale-accounts-1920097 ; India Today, "What is bahi khata" (Feb 2026) — https://www.indiatoday.in/information/story/explained-what-is-bahi-khata-the-red-ledger-seen-during-the-union-budget-2861054-2026-02-01
+
+Names of real apps appear only as sources; the prototype uses fictional people and amounts and no real logos.
 
 ## For AI assistants
 The same actions a person can take are described in [`agent-actions.json`](agent-actions.json) and [`llms.txt`](llms.txt). In the page they are available as `window.counterKhata` (`tools`, `call(name, args)`), and registered with WebMCP when the browser offers it. All data is local and fictional.
