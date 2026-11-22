@@ -2,7 +2,7 @@
 
 A concept redesign of a credit book (khata / udhaar) for small kirana shops, made for a UI/UX design challenge. It is a working prototype, not a real product: every shop, customer and amount is fictional, no money moves and no message is sent.
 
-**Live demo:** see the repository's GitHub Pages link.
+**Live demo:** https://driedsandwich.github.io/counter-khata/ · **Case study (one page):** https://driedsandwich.github.io/counter-khata/case-study.pdf
 
 ## Try it in 30 seconds
 1. Tap **2 · 5 · 0**, pick **Ravi**, tap **Save** (five taps). The timer at the top shows how long the entry took.

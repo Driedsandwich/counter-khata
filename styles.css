@@ -250,13 +250,13 @@ dialog::backdrop { background: #20251F66; }
 /* v2: two pending actions stack full width so the longer label does not wrap into a narrow column */
 .pending-actions button, .pending-actions .received-action, .pending-actions .received-action:first-child { flex: 1 1 100%; }
 
-/* v3 (2026-11-19): the amount stays on one line at a fixed height, so long numbers never push the keypad down (本人の試し) */
+/* v3 (2026-11-19): the amount stays on one line at a fixed height, so long numbers never push the keypad down (from hands-on testing) */
 .amount-block .display-amount { white-space: nowrap; overflow: hidden; overflow-wrap: normal; height: calc((var(--display) + 8px) * 1.15); display: flex; align-items: flex-end; }
 .amount-block .display-amount[data-len="m"] { font-size: calc((var(--display) + 8px) * .8); }
 .amount-block .display-amount[data-len="l"] { font-size: calc((var(--display) + 8px) * .64); }
 .amount-block .display-amount[data-len="xl"] { font-size: calc((var(--display) + 8px) * .54); }
 
-/* v4 (2026-11-19 本人の答え): colour themes. Default = bahi red (the red cloth of a trader's bahi-khata). Every theme keeps text contrast >= 4.5:1, and Given/Received never rely on colour alone. */
+/* v4 (2026-11-19): colour themes. Default = bahi red (the red cloth of a trader's bahi-khata). Every theme keeps text contrast >= 4.5:1, and Given/Received never rely on colour alone. */
 :root[data-theme="marigold"] { --background: #FFF7E3; --surface: #FFFDF5; --accent: #7A4A00; --accent-strong: #5C3800; --page: #F3EAD3; --ink: #2A2014; --muted: #6A5A44; --border: #EBDDBE; --green-tint: #FBE2A6; --neutral-tint: #F1E8D2; --on-accent: #FFFDF5; }
 :root[data-theme="green"] { --background: #F7F3E8; --surface: #FFFCF5; --accent: #174C3C; --accent-strong: #103C2E; --page: #E9E8DF; --ink: #20251F; --muted: #566057; --border: #D9D8CD; --green-tint: #DCE5D6; --neutral-tint: #E9E2D3; --on-accent: #FFFCF5; }
 :root[data-theme="mono"] { --background: #FFFFFF; --surface: #FFFFFF; --accent: #111111; --accent-strong: #000000; --page: #FFFFFF; --ink: #111111; --muted: #4A4A4A; --border: #9E9E9E; --green-tint: #E6E6E6; --neutral-tint: #F0F0F0; --on-accent: #FFFFFF; }
